@@ -6,21 +6,20 @@ import os, sys, io, re, codecs
 # Result sln is output to OUTPUT_FILE.
 #
 # # Arguments
-# [1] BUILD_TOOLS_PATH - Location of the build tools.
-# [2] PROJECT_PATH - vcxproj file or directory containing vcxproj file.
-# [3] OUTPUT_FILE - sln will be output here.
+# [1] PROJECT_PATH - vcxproj file or directory containing vcxproj file.
+# [2] OUTPUT_FILE - sln will be output here.
 #================================================================
 
 #===================
 # Configuration
 #===================
-SOLUTION_PATH = 'f4se_plugin.sln'
+BUILD_TOOLS_PATH = os.path.dirname(os.path.abspath(__file__))
+SOLUTION_PATH = os.path.join(BUILD_TOOLS_PATH, 'f4se_plugin.sln')
 
 # Get arguments
-if len(sys.argv) > 3:
-    BUILD_TOOLS_PATH = sys.argv[1]
-    PROJECT_PATH = sys.argv[2]
-    OUTPUT_FILE  = sys.argv[3]
+if len(sys.argv) > 2:
+    PROJECT_PATH = sys.argv[1]
+    OUTPUT_FILE  = sys.argv[2]
 else:
     print('FATAL: No project or output path provided.')
     sys.exit(1)
@@ -59,7 +58,7 @@ plugin_guid = guid_search.group(2)
 plugin_project_path = os.path.abspath(os.path.join(os.path.dirname(PROJECT_PATH), 'build.vcxproj')).replace('\\', '/')
 
 # Read template sln file
-with open(os.path.join(BUILD_TOOLS_PATH, SOLUTION_PATH), 'r') as f:
+with open(SOLUTION_PATH, 'r') as f:
     fileStr = f.read()
 
 # Update project references

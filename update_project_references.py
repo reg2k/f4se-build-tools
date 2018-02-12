@@ -10,7 +10,7 @@ import os, sys, io, re, codecs
 #
 # # Arguments
 # [1] PROJECT_PATH - vcxproj file or directory containing vcxproj file.
-# [2] NEW_DIR - Location of the src/f4se/ directory.
+# [2] F4SE_HOME - Location of the src/f4se/ directory.
 # [3] OUTPUT_FILE - vcxproj will be output here.
 #================================================================
 
@@ -20,8 +20,8 @@ import os, sys, io, re, codecs
 # Get arguments
 if len(sys.argv) > 3:
     PROJECT_PATH = sys.argv[1]
-    NEW_DIR      = sys.argv[2]
-    OUTPUT_FILE   = sys.argv[3]
+    F4SE_HOME    = sys.argv[2]
+    OUTPUT_FILE  = sys.argv[3]
 else:
     print('FATAL: No project, value or output directory provided.')
     sys.exit(1)
@@ -45,7 +45,7 @@ with open(PROJECT_PATH, 'r', encoding='utf-8') as f:
     fileStr = f.read()
 
 # Update project references
-fileStr = re_projectReference.sub(r'\1{}\3'.format(NEW_DIR), fileStr)
+fileStr = re_projectReference.sub(r'\1{}\3'.format(F4SE_HOME), fileStr)
     
 # Write new vcxproj    
 with codecs.open(OUTPUT_FILE, 'w', 'utf-8') as f:
