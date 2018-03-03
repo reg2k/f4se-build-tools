@@ -72,5 +72,11 @@ with suppress(FileNotFoundError):
     os.remove(BUILD_PROJECT)
     os.remove(BUILD_SOLUTION)
 
+# Package plugin
+if os.path.exists('dist'):
+    PLUGIN_LOCATION_PATTERN = '{}/x64/Release/*.dll'.format(BUILD_DIR)
+    DIST_DIR = 'dist'
+    packageOK = os.system('python {}/package_plugin.py "{}" "{}" "{}" "{}"'.format(BUILD_TOOLS_DIR, PLUGIN_LOCATION_PATTERN, DIST_DIR, BUILD_DIR, PROJECT_DIR))
+
 # Report result
 sys.exit(buildOK)
