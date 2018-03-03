@@ -74,6 +74,7 @@ if os.path.exists(DIST_DIR):
     
     # Copy dist folder to temporary folder.
     shutil.copytree(DIST_DIR, OUT_DIR)
+    os.makedirs(os.path.join(OUT_DIR, 'Data/F4SE/Plugins'), exist_ok=True)
     
     # Copy plugin files to Data/F4SE/Plugins.
     for file in glob.glob(PLUGIN_LOCATION_PATTERN):
