@@ -70,7 +70,6 @@ if os.path.exists(DIST_DIR):
     # Remove any previously packaged archive.
     with suppress(FileNotFoundError):
         shutil.rmtree(OUT_DIR)
-        os.remove(OUTPUT_LOCATION)
     
     # Copy dist folder to temporary folder.
     shutil.copytree(DIST_DIR, OUT_DIR)
